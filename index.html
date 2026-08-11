@@ -481,33 +481,34 @@
             }
 
             // --- PR Data & Chart Logic (Eldar's Data) ---
-            const today = new Date().toISOString().split('T')[0];
-            const prData = [
-                { id: 'smith_press_combined', name: 'לחיצת חזה סמית / עליון', note: 'איחוד של סמית רגיל ועליון', current: '32.5kg צד x 6', isNewPR: true, history: [{ date: '2026-07-08', weight: 26.5, reps: 5 }, { date: '2026-07-17', weight: 27.5, reps: 5 }, { date: '2026-07-20', weight: 30, reps: 6 }, { date: '2026-07-27', weight: 31.25, reps: 5 }, { date: '2026-08-02', weight: 32.5, reps: 5 }, { date: today, weight: 32.5, reps: 6 }], unit: 'kg צד' },
-                { id: 'weighted_dips', name: 'מקבילים בתוספת משקל', note: '', current: '20kg x 5', isNewPR: true, history: [{ date: '2026-07-08', weight: 10, reps: 8 }, { date: '2026-07-17', weight: 15, reps: 6 }, { date: '2026-07-20', weight: 17.5, reps: 6 }, { date: '2026-07-27', weight: 18.25, reps: 5 }, { date: today, weight: 20, reps: 5 }], unit: 'kg' },
-                { id: 'bb_row', name: 'חתירה מוט', note: '', current: '50kg x 7', isNewPR: true, history: [{ date: '2026-07-08', weight: 40, reps: 6 }, { date: '2026-07-17', weight: 45, reps: 6 }, { date: today, weight: 50, reps: 7 }], unit: 'kg' },
-                { id: 't_bar', name: 'טיבר (T-Bar)', note: '', current: '50kg x 6', isNewPR: false, history: [{ date: '2026-07-20', weight: 50, reps: 5 }, { date: '2026-07-27', weight: 50, reps: 6 }], unit: 'kg' },
-                { id: 'weighted_pullups', name: 'מתח עם משקל', note: '', current: '12.5kg x 7', isNewPR: true, history: [{ date: '2026-07-20', weight: 7.5, reps: 5 }, { date: '2026-07-27', weight: 7.5, reps: 6 }, { date: '2026-08-02', weight: 12.5, reps: 5 }, { date: today, weight: 12.5, reps: 7 }], unit: 'kg' },
-                { id: 'machine_pulldown', name: 'פולי עליון מכונה', note: '', current: '47.5kg x 9', isNewPR: false, history: [{ date: '2026-07-17', weight: 47.5, reps: 9 }], unit: 'kg' },
-                { id: 'machine_flyes', name: 'פרפר מכונה', note: 'כולל כתף אחורית', current: '31kg x 10', isNewPR: true, history: [{ date: '2026-07-17', weight: 22, reps: 10 }, { date: '2026-07-20', weight: 22, reps: 11 }, { date: today, weight: 31, reps: 10 }], unit: 'kg' },
-                { id: 'behind_neck_press', name: 'לחיצת כתפיים מאחורי הראש', note: '', current: '17.5kg x 3', isNewPR: false, history: [{ date: '2026-07-20', weight: 17.5, reps: 3 }], unit: 'kg' },
-                { id: 'lying_lat_raises', name: 'הרחקות שכיבה', note: '', current: '10kg x 9', isNewPR: false, history: [{ date: '2026-07-17', weight: 10, reps: 9 }], unit: 'kg' },
-                { id: 'seated_db_curls', name: 'כפיפות מרפקים משקולות בישיבה', note: '', current: '10kg x 8', isNewPR: true, history: [{ date: today, weight: 10, reps: 8 }], unit: 'kg' },
-                { id: 'preacher_machine', name: 'כפיפת כומר מכונה', note: 'כולל דרופ-סטים', current: '32.5kg x 5', isNewPR: false, history: [{ date: '2026-07-17', weight: 30, reps: 5 }, { date: '2026-07-20', weight: 30, reps: 6 }, { date: '2026-07-27', weight: 32.5, reps: 5 }], unit: 'kg' },
-                { id: 'lying_leg_curl', name: 'כפיפה בשכיבה', note: '', current: '11 פלטות x 6', isNewPR: true, history: [{ date: '2026-07-01', weight: 9, reps: 10 }, { date: '2026-07-08', weight: 11, reps: 6 }], unit: 'פלטות' },
-                { id: 'smith_squat_quads', name: 'סקוואט סמית (ארבע ראשי)', note: '', current: '25kg צד x 6', isNewPR: false, history: [{ date: '2026-07-01', weight: 25, reps: 6 }], unit: 'kg צד' },
-                { id: 'hack_squat', name: 'האק סקוואט', note: 'כולל עבודת פאמפ', current: '100kg x 6', isNewPR: false, history: [{ date: '2026-07-27', weight: 100, reps: 6 }], unit: 'kg' },
-                { id: 'bulgarian_smith', name: 'בולגרי סמית', note: '', current: '13.75kg צד x 6', isNewPR: false, history: [{ date: '2026-07-01', weight: 13.75, reps: 6 }], unit: 'kg צד' },
-                { id: 'rdl', name: 'רומני', note: '', current: '60kg x 6', isNewPR: false, history: [{ date: '2026-07-01', weight: 50, reps: 6 }, { date: '2026-07-27', weight: 60, reps: 6 }], unit: 'kg' },
-                { id: 'roman_chair', name: 'רומי', note: '', current: '10kg x 8', isNewPR: false, history: [{ date: '2026-07-20', weight: 10, reps: 8 }], unit: 'kg' },
-                { id: 'belt_squat', name: 'בלט סקוואט', note: '', current: '30kg x 8', isNewPR: false, history: [{ date: '2026-07-08', weight: 30, reps: 8 }], unit: 'kg' },
-                { id: 'smith_calves', name: 'תאומים בסמית', note: '', current: '45kg x 10', isNewPR: false, history: [{ date: '2026-07-01', weight: 45, reps: 10 }], unit: 'kg' },
-                { id: 'db_overhead_ext', name: 'פשיטה מאחורי הראש (משקולת)', note: '', current: '20kg x 10', isNewPR: false, history: [{ date: '2026-07-17', weight: 20, reps: 10 }], unit: 'kg' },
-                { id: 'leg_extensions', name: 'פשיטות ברכיים', note: '', current: '120kg x 6', isNewPR: true, history: [{ date: today, weight: 120, reps: 6 }], unit: 'kg' },
-                { id: 'seated_leg_curl', name: 'כפיפות ברכיים בישיבה', note: '', current: '50kg x 6', isNewPR: true, history: [{ date: today, weight: 50, reps: 6 }], unit: 'kg' }
-            ];
+        const today = new Date().toISOString().split('T')[0];
+        const prData = [
+            { id: 'smith_press_combined', name: 'לחיצת חזה סמית / עליון', note: 'איחוד של סמית רגיל ועליון', current: '32.5kg צד x 6', isNewPR: true, history: [{ date: '2026-07-08', weight: 26.5, reps: 5 }, { date: '2026-07-17', weight: 27.5, reps: 5 }, { date: '2026-07-20', weight: 30, reps: 6 }, { date: '2026-07-27', weight: 31.25, reps: 5 }, { date: '2026-08-02', weight: 32.5, reps: 5 }, { date: today, weight: 32.5, reps: 6 }], unit: 'kg צד' },
+            { id: 'weighted_dips', name: 'מקבילים בתוספת משקל', note: '', current: '20kg x 5', isNewPR: true, history: [{ date: '2026-07-08', weight: 10, reps: 8 }, { date: '2026-07-17', weight: 15, reps: 6 }, { date: '2026-07-20', weight: 17.5, reps: 6 }, { date: '2026-07-27', weight: 18.25, reps: 5 }, { date: today, weight: 20, reps: 5 }], unit: 'kg' },
+            { id: 'bb_row', name: 'חתירה מוט', note: '', current: '50kg x 7', isNewPR: true, history: [{ date: '2026-07-08', weight: 40, reps: 6 }, { date: '2026-07-17', weight: 45, reps: 6 }, { date: today, weight: 50, reps: 7 }], unit: 'kg' },
+            { id: 't_bar', name: 'טיבר (T-Bar)', note: '', current: '50kg x 6', isNewPR: false, history: [{ date: '2026-07-20', weight: 50, reps: 5 }, { date: '2026-07-27', weight: 50, reps: 6 }], unit: 'kg' },
+            { id: 'weighted_pullups', name: 'מתח עם משקל', note: '', current: '15kg x 5', isNewPR: true, history: [{ date: '2026-07-20', weight: 7.5, reps: 5 }, { date: '2026-07-27', weight: 7.5, reps: 6 }, { date: '2026-08-02', weight: 12.5, reps: 5 }, { date: today, weight: 12.5, reps: 7 }, { date: '2026-08-10', weight: 15, reps: 5 }], unit: 'kg' },
+            { id: 'machine_pulldown', name: 'פולי עליון מכונה', note: '', current: '47.5kg x 9', isNewPR: false, history: [{ date: '2026-07-17', weight: 47.5, reps: 9 }], unit: 'kg' },
+            { id: 'machine_flyes', name: 'פרפר מכונה', note: 'כולל כתף אחורית', current: '31kg x 10', isNewPR: true, history: [{ date: '2026-07-17', weight: 22, reps: 10 }, { date: '2026-07-20', weight: 22, reps: 11 }, { date: today, weight: 31, reps: 10 }], unit: 'kg' },
+            { id: 'behind_neck_press', name: 'לחיצת כתפיים מאחורי הראש', note: '', current: '17.5kg x 3', isNewPR: false, history: [{ date: '2026-07-20', weight: 17.5, reps: 3 }], unit: 'kg' },
+            { id: 'lying_lat_raises', name: 'הרחקות שכיבה', note: '', current: '10kg x 9', isNewPR: false, history: [{ date: '2026-07-17', weight: 10, reps: 9 }], unit: 'kg' },
+            { id: 'seated_db_curls', name: 'כפיפות מרפקים משקולות בישיבה', note: '', current: '10kg x 8', isNewPR: true, history: [{ date: today, weight: 10, reps: 8 }], unit: 'kg' },
+            { id: 'preacher_machine', name: 'כפיפת כומר מכונה', note: 'כולל דרופ-סטים', current: '32.5kg x 5', isNewPR: false, history: [{ date: '2026-07-17', weight: 30, reps: 5 }, { date: '2026-07-20', weight: 30, reps: 6 }, { date: '2026-07-27', weight: 32.5, reps: 5 }], unit: 'kg' },
+            { id: 'lying_leg_curl', name: 'כפיפה בשכיבה', note: 'סט עוקב: 11 פלטות x 8', current: '12 פלטות x 6', isNewPR: true, history: [{ date: '2026-07-01', weight: 9, reps: 10 }, { date: '2026-07-08', weight: 11, reps: 6 }, { date: '2026-08-10', weight: 12, reps: 6 }], unit: 'פלטות' },
+            { id: 'smith_squat_quads', name: 'סקוואט סמית (ארבע ראשי)', note: '', current: '25kg צד x 6', isNewPR: false, history: [{ date: '2026-07-01', weight: 25, reps: 6 }], unit: 'kg צד' },
+            { id: 'hack_squat', name: 'האק סקוואט', note: 'פאמפ: 100x8, 80x15', current: '110kg x 6', isNewPR: true, history: [{ date: '2026-07-27', weight: 100, reps: 6 }, { date: '2026-08-10', weight: 110, reps: 6 }], unit: 'kg' },
+            { id: 'bulgarian_smith', name: 'בולגרי סמית', note: 'סט נוסף: 10x10', current: '15kg צד x 6', isNewPR: true, history: [{ date: '2026-07-01', weight: 13.75, reps: 6 }, { date: '2026-08-10', weight: 15, reps: 6 }], unit: 'kg צד' },
+            { id: 'rdl', name: 'רומני', note: 'סט נוסף: 60x10', current: '65kg x 6', isNewPR: true, history: [{ date: '2026-07-01', weight: 50, reps: 6 }, { date: '2026-07-27', weight: 60, reps: 6 }, { date: '2026-08-10', weight: 65, reps: 6 }], unit: 'kg' },
+            { id: 'roman_chair', name: 'רומי', note: '', current: '10kg x 8', isNewPR: false, history: [{ date: '2026-07-20', weight: 10, reps: 8 }], unit: 'kg' },
+            { id: 'belt_squat', name: 'בלט סקוואט', note: '', current: '30kg x 8', isNewPR: false, history: [{ date: '2026-07-08', weight: 30, reps: 8 }], unit: 'kg' },
+            { id: 'smith_calves', name: 'תאומים בסמית', note: '', current: '100kg x 10', isNewPR: true, history: [{ date: '2026-07-01', weight: 45, reps: 10 }, { date: '2026-08-10', weight: 100, reps: 10 }], unit: 'kg' },
+            { id: 'db_overhead_ext', name: 'פשיטה מאחורי הראש (משקולת)', note: '', current: '20kg x 10', isNewPR: false, history: [{ date: '2026-07-17', weight: 20, reps: 10 }], unit: 'kg' },
+            { id: 'leg_extensions', name: 'פשיטות ברכיים', note: 'רגל אחת. שתי רגליים: max x 8', current: '65kg x 6', isNewPR: true, history: [{ date: today, weight: 120, reps: 6 }, { date: '2026-08-10', weight: 65, reps: 6 }], unit: 'kg' },
+            { id: 'seated_leg_curl', name: 'כפיפות ברכיים בישיבה', note: '', current: '50kg x 6', isNewPR: false, history: [{ date: today, weight: 50, reps: 6 }], unit: 'kg' },
+            { id: 'adductors', name: 'מקרבים', note: '', current: '55kg x 8', isNewPR: true, history: [{ date: '2026-08-10', weight: 55, reps: 8 }], unit: 'kg' }
+        ];
 
-            const exerciseSelect = document.getElementById('exerciseSelect');
+        const exerciseSelect = document.getElementById('exerciseSelect');
             const exerciseDetailsContainer = document.getElementById('exerciseDetailsContainer');
             const exerciseHistoryList = document.getElementById('exerciseHistoryList');
             let progressChartInstance = null;
@@ -913,6 +914,7 @@
     </script>
 </body>
 </html>
+
 
 
 
